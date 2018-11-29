@@ -4,7 +4,9 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const errorHandler  = require("./handlers/error");
+const { loginRequired, ensureCorrectUser } = require("./middleware/auth");
 const authRoutes = require("./routes/auth");
+const messagesRoutes = require("./routes/messages");
 
 const PORT = 8081;
 
@@ -14,6 +16,7 @@ app.use(bodyParser.json());
 // all my routes
 
 app.use("/api/auth", authRoutes);
+app.use("/api/users/:id/messages", loginRequired, ensureCorrectUser, messagesRoutes);
 
 
 app.use(function(req, res, next) {
