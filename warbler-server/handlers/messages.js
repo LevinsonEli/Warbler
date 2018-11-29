@@ -1,5 +1,5 @@
 const db = require("../models");
-
+// POST - /api/users/:id/messages
 exports.createMessage = async function(req, res, next) {
     try {
         let message = await db.Message.create({
@@ -19,6 +19,23 @@ exports.createMessage = async function(req, res, next) {
     }
 }
 
-exports.getMessage = async function(req, res, next) {}
+// GET - /api/users/:id/messages/:message_id
+exports.getMessage = async function(req, res, next) {
+    try {
+        let message = await db.message.find(req.params.message_id);
+        return res.status(200).json(message);
+    } catch (err) {
+        return next(err);
+    }
+}
 
-exports.deleteMessage = async function(req, res, next) {}
+// DELETE - /api/users/:id/messages/:message_id
+exports.deleteMessage = async function(req, res, next) {
+    try {
+        let foundMessage = await db.Message.findById(req.params.message_id);
+        await foundMessage.remove();
+        return res.status(200).json(foundMessage);
+    } catch (err) {
+        return next(err);
+    }
+}

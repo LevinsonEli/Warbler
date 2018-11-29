@@ -18,6 +18,20 @@ app.use(bodyParser.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/users/:id/messages", loginRequired, ensureCorrectUser, messagesRoutes);
 
+app.get("/api/messages", loginRequired, async function(req, res, next) {
+    try {
+        let messages = await db.messages
+            .find()
+            .sort({ createdAt: "desc"})
+            .populate("user", {
+                username: true,
+                profileImageUrl: true
+            });
+            return req.status(200).json(message);
+    } catch (err) {
+
+    }
+})
 
 app.use(function(req, res, next) {
     let err = new Error("Not found");
