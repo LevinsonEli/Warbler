@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import Logo from "../images/warbler/warbler-logo.png";
 import { logout } from "../store/actions/auth";
+import Logo from "../images/warbler/warbler-logo.png";
 
 class Navbar extends Component {
     logout = e => {
@@ -19,9 +19,13 @@ class Navbar extends Component {
                         </Link>
                     </div>
                     {this.props.currentUser.isAuthenticated ? (
-                        <ul className="nav-navbav-nav navbar-rigth">
+                        <ul className="nav-navbav-nav navbar-right">
                             <li>
-                                <Link to={`/users/${this.props.currentUser.user.id}/messages/new`}>New Message</Link>
+                            <Link
+                                to={`/users/${this.props.currentUser.user.id}/messages/new`}
+                            >
+                                New Message
+                            </Link>
                             </li>
                             <li>
                                 <a onClick={this.logout}>Log Out</a>
@@ -45,10 +49,10 @@ class Navbar extends Component {
     }
 }
 
-function mapStateTpProps(state) {
+function mapStateToProps(state) {
     return {
         currentUser: state.currentUser
     };
 }
 
-export default connect(mapStateTpProps, {logout})(Navbar);
+export default connect(mapStateToProps, {logout})(Navbar);

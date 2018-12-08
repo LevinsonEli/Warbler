@@ -1,4 +1,5 @@
 const db = require("../models");
+
 // POST - /api/users/:id/messages
 exports.createMessage = async function(req, res, next) {
     try {

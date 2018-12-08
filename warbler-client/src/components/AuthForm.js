@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-export default class AuthForm extends Component {
+class AuthForm extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -21,11 +21,11 @@ export default class AuthForm extends Component {
         e.preventDefault();
         const authType = this.props.signUp ? "signup" : "signin";
         this.props.onAuth(authType, this.state)
-        .then(() => {
-            this.props.history.push("/");
-        }).catch(() => {
-            return;
-        })
+            .then(() => {
+                this.props.history.push("/");
+            }).catch(() => {
+                return;
+            })
     };
 
     render() {
@@ -47,8 +47,9 @@ export default class AuthForm extends Component {
                                     {errors.message}
                                 </div>
                             )}
-                            <label htmlForm="email">Email:</label>
+                            <label htmlFor="email">Email:</label>
                             <input 
+                                autoComplete="off"
                                 className="form-control" 
                                 id="email"
                                 name="email"
@@ -56,18 +57,21 @@ export default class AuthForm extends Component {
                                 value={email}
                                 type="text"
                             />
-                            <label htmlForm="password">Password:</label>
+                            <label htmlFor="password">Password:</label>
                             <input 
+                                autoComplete="off"
                                 className="form-control" 
                                 id="password"
                                 name="password"
                                 onChange={this.handleChange}
                                 type="password"
+                                value={password}
                             />
                             {signUp && (
                                 <div>
-                                    <label htmlForm="username">Username:</label>
+                                    <label htmlFor="username">Username:</label>
                                     <input 
+                                        autoComplete="off"
                                         className="form-control" 
                                         id="username"
                                         name="username"
@@ -75,8 +79,9 @@ export default class AuthForm extends Component {
                                         value={username}
                                         type="text"
                                     />
-                                    <label htmlForm="image-url">Image URL:</label>
+                                    <label htmlFor="image-url">Image URL:</label>
                                     <input 
+                                        autoComplete="off"
                                         className="form-control" 
                                         id="image-url"
                                         name="profileImageUrl"
@@ -97,3 +102,14 @@ export default class AuthForm extends Component {
     }
 }
 
+// AuthForm.propTypes = {
+//     buttonText: PropTypes.string,
+//     errors: PropTypes.object,
+//     heading: PropTypes.string,
+//     history: PropTypes.object,
+//     onAuth: PropTypes.func,
+//     signIn: PropTypes.bool,
+//     removeError: PropTypes.func
+//   };
+
+export default AuthForm;

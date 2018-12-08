@@ -66,3 +66,30 @@ ul.nav.navbar-nav li {
   color: white;
   text-shadow: 0 0 8px #55777f;
 }
+
+#messages .list-group-line {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 20px;
+}
+
+#messages:not(.no-hover).list-group-item:hover {
+  background-color: #e6ecf0;
+}
+
+.timeline-image {
+  border-radius: 50px;
+  height: 48px;
+  width: 48px;
+  margin: 2px 30px 10px 10px;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+a.btn.btn-danger,
+a.btn.btn-danger:hover {
+  color: white;
+}
+

@@ -7,6 +7,7 @@ const errorHandler  = require("./handlers/error");
 const { loginRequired, ensureCorrectUser } = require("./middleware/auth");
 const authRoutes = require("./routes/auth");
 const messagesRoutes = require("./routes/messages");
+const db = require("./models");
 
 const PORT = 8081;
 
@@ -14,22 +15,23 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // all my routes
-
 app.use("/api/auth", authRoutes);
 app.use("/api/users/:id/messages", loginRequired, ensureCorrectUser, messagesRoutes);
 
 app.get("/api/messages", loginRequired, async function(req, res, next) {
     try {
-        let messages = await db.messages
+        console.log("You got here");
+        let messages = await db.Message
             .find()
             .sort({ createdAt: "desc"})
             .populate("user", {
                 username: true,
                 profileImageUrl: true
             });
-            return req.status(200).json(message);
+            console.log(messages[0]);
+            return req.status(200).json(messages);
     } catch (err) {
-
+        next(err);
     }
 })
 
@@ -40,7 +42,6 @@ app.use(function(req, res, next) {
 });
 
 app.use(errorHandler);
-
 
 app.listen(PORT, function() {
     console.log(`Server is starting on port ${PORT}`);
