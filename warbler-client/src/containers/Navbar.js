@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../store/actions/auth";
-import Logo from "../images/warbler/warbler-logo.png";
 
 class Navbar extends Component {
     logout = e => {
@@ -15,30 +14,37 @@ class Navbar extends Component {
                 <div className="container-fluid">
                     <div className="navbar-header">
                         <Link to="/" className="navbar-brand">
-                            <img src={Logo} alt="Warbler Home" />
+                            <h1 className="logoName btn">
+                                <i className="fas fa-dove"></i>
+                                <span>Warbler Messager</span>
+                            </h1>
                         </Link>
                     </div>
                     {this.props.currentUser.isAuthenticated ? (
-                        <ul className="nav-navbav-nav navbar-right">
+                        <ul className="navbarList">
                             <li>
-                            <Link
-                                to={`/users/${this.props.currentUser.user.id}/messages/new`}
-                            >
-                                New Message
-                            </Link>
+                                <Link
+                                    to={`/users/${this.props.currentUser.user.id}/messages/new`}
+                                >
+                                    <i className="fas fa-comment"></i>
+                                    New Message
+                                </Link>
                             </li>
                             <li>
-                                <a onClick={this.logout}>Log Out</a>
+                                <button className="a" onClick={this.logout}>
+                                    <i className="fas fa-sign-out-alt"></i>
+                                    Log Out
+                                </button>
                             </li>
                         </ul>
                     ):
                     (
-                        <ul className="nav navbar-nav navbar-right">
+                        <ul className="navbarList">
                             <li>
-                                <Link to="/signup">Sign up</Link>
+                                <Link to="/signup"><i className="fas fa-user-plus"></i>Sign up</Link>
                             </li>
                             <li>
-                                <Link to="/signin">Sign in</Link>
+                                <Link to="/signin"><i className="fas fa-sign-in-alt"></i>Sign in</Link>
                             </li>
                         </ul>
                     )

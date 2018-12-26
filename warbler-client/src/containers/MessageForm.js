@@ -2,12 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postNewMessage } from "../store/actions/messages";
 
+const MAX_MES_LENGTH = 240;
+
 class MessageForm extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        message: ""
+        message: "",
+        maxLenthColor: "inherit"
       };
+      
+      this.handleChange = this.handleChange.bind(this);
+      this.handleNewMessage = this.handleNewMessage.bind(this);
     }
   
     handleNewMessage = event => {
@@ -16,23 +22,35 @@ class MessageForm extends Component {
       this.setState({ message: "" });
       this.props.history.push("/");
     };
+
+    handleChange(e) {
+      this.setState({ message: e.target.value.substring(0, MAX_MES_LENGTH) });
+      if (e.target.value.length >= MAX_MES_LENGTH)
+        this.setState({maxLenthColor: "red"});
+      else
+        this.setState({maxLenthColor: "inherit"});
+    }
   
     render() {
       return (
-        <form onSubmit={this.handleNewMessage}>
-          {this.props.errors.message && (
-            <div className="alert alert-danger">{this.props.errors.message}</div>
-          )}
-          <input
-            type="text"
-            className="form-control"
-            value={this.state.message}
-            onChange={e => this.setState({ message: e.target.value })}
-          />
-          <button type="submit" className="btn btn-success">
-            Add my message!
-          </button>
-        </form>
+        <div className="messageForm">
+        <h2>Type your message</h2>
+        <p style={{color: this.state.maxLenthColor}}>Max length 240 symbols. Yours: {this.state.message.length}</p>
+          <form onSubmit={this.handleNewMessage}>
+            {this.props.errors.message && (
+              <div className="alert alert-danger">{this.props.errors.message}</div>
+            )}
+            <textarea
+              type="text"
+              className="form-control message"
+              value={this.state.message}
+              onChange={this.handleChange}
+            ></textarea>
+            <button type="submit" className="btn btn-success">
+              Add my message!
+            </button>
+          </form>
+        </div>
       );
     }
   }

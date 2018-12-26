@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, withRouter, Redirect } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Homepage from "../components/Homepage";
 import AuthForm from "../components/AuthForm";
@@ -24,7 +24,7 @@ const Main = (props) => {
                             removeError={removeError}
                             errors={errors}
                             onAuth={authUser} 
-                            buttonText="log in" 
+                            buttonText="Log In" 
                             heading="Welcome Back." 
                             {...props} 
                         />
@@ -37,7 +37,7 @@ const Main = (props) => {
                             errors={errors}
                             onAuth={authUser} 
                             signUp
-                            buttonText="sign me up" 
+                            buttonText="Sign Me Up" 
                             heading="Join the Warbler." 
                             {...props} 
                         />

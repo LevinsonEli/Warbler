@@ -11,27 +11,27 @@ const MessageItem = ({
     removeMessage,
     isCorrectUser
   }) => (
-    <div>
+    <div className="messageItem">
       <li className="list-group-item">
         <img
           src={profileImageUrl || DefaultProfileImg}
           alt={username}
-          height="100"
-          width="100"
           className="timeline-image"
         />
         <div className="message-area">
-          <Link to="/">@{username} &nbsp;</Link>
-          <span className="text-muted">
-            <Moment className="text-muted" format="Do MMM YYYY">
-              {date}
-            </Moment>
-          </span>
+          <div className="spaceBetween">
+            <Link to="/">@{username} &nbsp;</Link>
+            <span className="text-muted">
+              <Moment className="text-muted" format="Do MMM YYYY">
+                {date}
+              </Moment>
+            </span>
+          </div>
           <p>{text}</p>
           {isCorrectUser && (
-            <a className="btn btn-danger" onClick={removeMessage}>
+            <button className="btn btn-danger" onClick={removeMessage}>
               Delete
-            </a>
+            </button>
           )}
         </div>
       </li>

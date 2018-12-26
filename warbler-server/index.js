@@ -29,7 +29,7 @@ app.get("/api/messages", loginRequired, async function(req, res, next) {
                 profileImageUrl: true
             });
             console.log(messages[0]);
-            return req.status(200).json(messages);
+            return res.status(200).json(messages);
     } catch (err) {
         next(err);
     }
